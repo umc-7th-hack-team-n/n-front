@@ -20,6 +20,10 @@ const JudgeInputPage = () => {
     setDefendantStory(e.target.value);
   }
 
+  const handleNext = () => {
+    navigate('/loading');
+  }
+
 
   return (
     <>
@@ -30,7 +34,7 @@ const JudgeInputPage = () => {
           <Bubble type="defendant" value={defendantStory} handler={changeDefendantStory} />
         </InputContainer>
         <ButtonContainer>
-          <Button>판결 들으러가기</Button>
+          <Button onClick={handleNext}>판결 들으러가기</Button>
         </ButtonContainer>
       </Container>
     </>
