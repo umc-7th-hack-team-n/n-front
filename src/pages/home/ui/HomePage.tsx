@@ -18,7 +18,7 @@ export const HomePage = () => {
   return (
     <Container>
       <HomeAppbar rightHeaderActionArr={rightHeaderActionArr} />
-      <ContentsDiv onClick={()=>navigate('/')}>
+      <ContentsDiv  onClick={() => navigate(`/rules/${1}`)}>
         <ContentImg src={ImgRules} width={'100%'} />
         <Text right={'20px'} bottom={'15px'}>우리가 지킬 10가지</Text>
       </ContentsDiv>
