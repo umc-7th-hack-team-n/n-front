@@ -4,5 +4,5 @@ export interface CalendarEvent {
 }
 
 export interface CalendarResponse {
-    events: CalendarEvent[];
+    success? : CalendarEvent[];
 }

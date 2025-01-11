@@ -15,11 +15,8 @@ import {useGetCalendar} from "@pages/calendar/feature/useGetCalendar.ts";
 import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import IcCalendarMarked from "@shared/assets/icon/ic-calendar-marked.svg";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 export const CalendarPage = () => {
-    const [value, setValue] = useState<Value>(new Date());
+    const [value, setValue] = useState<Date>(new Date());
     const [confilct_id, setConflitId] = useState<number>(0);
     const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
@@ -52,7 +49,8 @@ export const CalendarPage = () => {
     const tileContent = ({date, view}: { date: Date; view: string }) => {
         if (view === "month") {
             const formattedDate = dayjs(date).format("YYYY-MM-DD"); // 로컬 시간 기준으로 날짜 형식화
-            let markedDate= data?.success?.find((item) => item.date === formattedDate);
+            console.log(data?.success);
+            const markedDate = data?.success?.find((item) => item.date === formattedDate);
 
             if (markedDate?.date) {
                 return (
@@ -75,7 +73,6 @@ export const CalendarPage = () => {
                     locale="ko-KR"
                     calendarType='gregory'
                     value={value}
-                    onChange={setValue}
                     tileContent={tileContent}
                     view="month"
                     nextLabel={"▶"}
@@ -83,9 +80,9 @@ export const CalendarPage = () => {
                     next2Label={null}
                     prev2Label={null}
                     showNeighboringMonth={false}
-                    onActiveStartDateChange={({ activeStartDate }) => {handleMonth(activeStartDate);}}
-                    formatShortWeekday={(locale, date) => customMonth[date.getDay()]}
-                    formatDay={(locale, date) => dayjs(date).format("D")}
+                    onActiveStartDateChange={({ activeStartDate }) => {handleMonth(activeStartDate!);}}
+                    formatShortWeekday={(_, date) => customMonth[date.getDay()]}
+                    formatDay={(_, date) => dayjs(date).format("D")}
                 />
             </StyledCalendarWrapper>
 
@@ -106,7 +103,7 @@ const StyledCalendarWrapper = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 39px;
-    padding: 0px 20px;
+    padding: 0 20px;
 
     // 캘린더 전체
 

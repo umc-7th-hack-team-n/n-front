@@ -7,13 +7,13 @@ import Button from "@pages/calendar/components/Button.tsx";
 
 interface ModalDefaultType {
     onClickModalButton: () => void;
-    onClickToggleModal: () => void;
+    onClickToggleModal: (id: number) => void;
 }
 
 const Modal = ({onClickModalButton, onClickToggleModal }: PropsWithChildren<ModalDefaultType>) => {
     const closeModal = () => {
         if (onClickToggleModal) {
-            onClickToggleModal();
+            onClickToggleModal(0);
         }
     }
 
