@@ -33,14 +33,14 @@ export const CalendarPage = () => {
         setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
+    const onClickModalButton = useCallback(() => {
+        navigate("/judge-result", {state: conflitID});
+    }, [setConflitID]);
+
     const onClickMarkedDate = (id: number): void => {
         setConflitID(id)
         onClickToggleModal();
     }
-
-    const onClickModalButton = useCallback(() => {
-        navigate("/judge-result");
-    }, [setConflitID]);
 
     const handleMonth = (activeMonth: Date) => {
        if(activeMonth){
