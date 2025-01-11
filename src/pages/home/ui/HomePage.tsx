@@ -24,7 +24,7 @@ export const HomePage = () => {
         <Text right={'20px'} bottom={'15px'}>우리가 지킬 10가지</Text>
       </ContetnsDiv>
       <SmallContainer>
-        <SmallContetnsDiv color={'#DEE5FF'}>
+        <SmallContetnsDiv onClick={()=>navigate('/judge-input')} color={'#DEE5FF'}>
           <img src={LeftHand}/>
           <img src={RightHand} />
           <Text bottom={'75px'}>판결</Text>
@@ -33,7 +33,7 @@ export const HomePage = () => {
             제3자의 시선에서 답을 찾아보세요.
           </SmallText>
         </SmallContetnsDiv>
-        <SmallContetnsDiv color={'#FFEAE5'}>
+        <SmallContetnsDiv onClick={()=>navigate('/')} color={'#FFEAE5'}>
           <img src={ImgHandShake} />
           <Text bottom={'75px'}>화해</Text>
           <SmallText>
