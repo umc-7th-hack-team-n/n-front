@@ -21,7 +21,7 @@ const JudgeResultPage = () => {
   const navigate = useNavigate();
   const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => navigate(-1) };
   const finish = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   return (
