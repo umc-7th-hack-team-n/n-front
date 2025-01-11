@@ -1,14 +1,15 @@
 import { createBrowserRouter } from 'react-router';
-
 import { RootLayout } from '@app/layout';
 import { HomePage } from "@pages/home";
 import JudgeInputPage from "@pages/judge/ui/JudgeInputPage.tsx";
 import LoadingPage from "@pages/judge/ui/LoadingPage.tsx";
-import RulesPage from "@pages/rules/ui/RulesPage.tsx";
+import RulesModifyPage from "@pages/rules/ui/RulesModifyPage.tsx";
 import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
 import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
-import { CalendarPage } from "@pages/calendar";
 import CalendarResultPage from "@pages/calendar/ui/CalendarResultPage.tsx";
+import AlarmPage from '@pages/alarm/ui/AlarmPage';
+import RulesPage from "@pages/rules/ui/RulesPage.tsx";
+import { CalendarPage } from "@pages/calendar";
 
 
 export const router = createBrowserRouter([
@@ -37,8 +38,8 @@ export const router = createBrowserRouter([
         element: <LoadingPage />
       },
       {
-        path: 'rules',
-        element: <RulesPage />
+        path: 'rules-modify',
+        element: <RulesModifyPage />
       },
       {
         path: 'judge-result',
@@ -47,8 +48,15 @@ export const router = createBrowserRouter([
       {
         path: 'home',
         element: <HomePage />
+      },
+      {
+        path: 'alarm',
+        element: <AlarmPage />
+      },
+      {
+        path: 'rules/:id',
+        element: <RulesPage />
       }
-
     ],
   },
 ]);

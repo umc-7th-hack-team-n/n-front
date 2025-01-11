@@ -2,16 +2,17 @@ import styled from 'styled-components';
 import { HeaderAction } from '@shared/types';
 
 interface AppBarProps {
-  title?: string;
   rightHeaderActionArr?: HeaderAction[];
+  m_nickname: string;
+  f_nickname: string;
 }
 
-const HomeAppbar = ({ rightHeaderActionArr }: AppBarProps) => {
-
+const HomeAppbar = ({ rightHeaderActionArr, f_nickname, m_nickname }: AppBarProps) => {
+  console.log(f_nickname, m_nickname);
   return (
     <Wrapper>
       <TextContainer>
-        <LargeText>붕어빵 ❤️ 호빵</LargeText>
+        <LargeText>{f_nickname} ❤️ {m_nickname}</LargeText>
         <SmallText>님 오늘도 진심 어린 대화로 하루를 마무리해요</SmallText>
       </TextContainer>
       <IconContainer>

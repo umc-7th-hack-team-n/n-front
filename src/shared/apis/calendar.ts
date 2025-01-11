@@ -2,9 +2,9 @@ import { axiosInstance} from "@shared/apis/axiosInstance.ts";
 import { BaseResponse} from "@shared/types/base.ts";
 import { CalendarResponse} from "@shared/types/calendar.ts";
 
-export const getCalendar: (month: string) => Promise<BaseResponse<CalendarResponse>> = async (month) =>{
+export const getCalendar = async (month: string) =>{
     try {
-        const response = await axiosInstance.get(`/api/conflicts/${month}`);
+        const response = await axiosInstance.get<Promise<BaseResponse<CalendarResponse>>>(`/api/conflicts/${month}`);
         return response.data;
     } catch (error){
         console.error('calendar API Error', error);

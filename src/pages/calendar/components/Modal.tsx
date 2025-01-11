@@ -10,7 +10,7 @@ interface ModalDefaultType {
     onClickToggleModal: () => void;
 }
 
-const Modal = ({onClickModalButton, onClickToggleModal}: PropsWithChildren<ModalDefaultType>) => {
+const Modal = ({onClickModalButton, onClickToggleModal }: PropsWithChildren<ModalDefaultType>) => {
     const closeModal = () => {
         if (onClickToggleModal) {
             onClickToggleModal();
