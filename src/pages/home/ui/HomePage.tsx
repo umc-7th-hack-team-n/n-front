@@ -19,12 +19,12 @@ export const HomePage = () => {
   return (
     <Container>
       <AppBar leftHeaderAction={leftHeaderAction} rightHeaderActionArr={rightHeaderActionArr} />
-      <ContetnsDiv onClick={()=>navigate('/')}>
+      <ContetnsDiv onClick={()=>navigate('/rules')}>
         <ContentImg src={ImgRules} width={'100%'} />
         <Text right={'20px'} bottom={'15px'}>우리가 지킬 10가지</Text>
       </ContetnsDiv>
       <SmallContainer>
-        <SmallContetnsDiv color={'#DEE5FF'}>
+        <SmallContetnsDiv color={'#DEE5FF'} onClick={()=>navigate('/judge-input')}>
           <img src={LeftHand}/>
           <img src={RightHand} />
           <Text bottom={'75px'}>판결</Text>
@@ -33,7 +33,7 @@ export const HomePage = () => {
             제3자의 시선에서 답을 찾아보세요.
           </SmallText>
         </SmallContetnsDiv>
-        <SmallContetnsDiv color={'#FFEAE5'}>
+        <SmallContetnsDiv color={'#FFEAE5'} onClick={()=>navigate('/')}>
           <img src={ImgHandShake} />
           <Text bottom={'75px'}>화해</Text>
           <SmallText>
