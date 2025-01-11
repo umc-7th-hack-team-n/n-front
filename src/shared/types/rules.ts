@@ -1,4 +1,5 @@
 export interface RulesReq {
+  [key: string]: string;
   text1: string;
   text2: string;
   text3: string;
