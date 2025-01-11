@@ -9,10 +9,11 @@ import reconciliation from "@icon/ic-reconciliation.svg"
 import SmallBanner from "@home/components/SmallBanner.tsx";
 
 export const HomePage = () => {
+    const navigate = useNavigate();
   const rightHeaderActionArr: HeaderAction[] = [
-    { icon: IcCalendar, onClick: () => undefined },
+    { icon: IcCalendar, onClick: () => navigate('/calendar') },
   ];
-  const navigate = useNavigate();
+
 
   return (
     <Container>

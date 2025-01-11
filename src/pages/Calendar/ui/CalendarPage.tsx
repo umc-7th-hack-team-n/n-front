@@ -10,50 +10,54 @@ import styled from "styled-components";
 import 'react-calendar/dist/Calendar.css';
 import dayjs from "dayjs";
 
+import {useGetCalendar} from "@calendar/feature/useGetCalendar.ts";
+
 import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import IcCalendarMarked from "@shared/assets/icon/ic-calendar-marked.svg";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-interface MarkedDate {
-    date: string;
-    isMarked: boolean;
-}
-
 export const CalendarPage = () => {
-    const [value, onChange] = useState<Value>(new Date());
+    const [value, setValue] = useState<Value>(new Date());
+    const [conflitID, setConflitID] = useState<number>(0);
     const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
     const navigate: NavigateFunction = useNavigate();
     const leftHeaderAction: HeaderAction = {icon: IcLeftArrow, onClick: () => navigate(-1)};
     const customMonth: string[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-    // 더미 데이터
-    const markedDates: MarkedDate[] = [
-        {date: '2025-01-01', isMarked: true},
-        {date: '2025-01-08', isMarked: true},
-        {date: '2025-01-09', isMarked: true},
-    ];
+    const {data} = useGetCalendar(dayjs(value).format("YYYY-MM"));
 
     const onClickToggleModal = useCallback(() => {
         setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
-    const onClickMarkedDate = (date: string): void => {
+    const onClickModalButton = useCallback(() => {
+        navigate("/judge-result", {state: conflitID});
+    }, [setConflitID]);
+
+    const onClickMarkedDate = (id: number): void => {
+        setConflitID(id)
         onClickToggleModal();
+    }
+
+    const handleMonth = (activeMonth: Date) => {
+       if(activeMonth){
+           setValue(activeMonth);
+       }
     }
 
     const tileContent = ({date, view}: { date: Date; view: string }) => {
         if (view === "month") {
             const formattedDate = dayjs(date).format("YYYY-MM-DD"); // 로컬 시간 기준으로 날짜 형식화
-            const markedDate = markedDates.find((item) => item.date === formattedDate);
+            const markedDate = data?.success.find((item) => item.date === formattedDate);
 
-            if (markedDate?.isMarked) {
+            if (markedDate?.date) {
                 return (
                     <MarkedImage
                         src={IcCalendarMarked}
-                        onClick={() => onClickMarkedDate(formattedDate)} // 올바른 날짜 전달
+                        onClick={() => onClickMarkedDate(markedDate.conflict_id)} // 올바른 날짜 전달
                     />
                 );
             }
@@ -64,13 +68,13 @@ export const CalendarPage = () => {
     return (
         <>
             <AppBar leftHeaderAction={leftHeaderAction} title="캘린더"/>
-            {isOpenModal && <Modal onClickToggleModal={onClickToggleModal}/>}
+            {isOpenModal && <Modal onClickModalButton={onClickModalButton} onClickToggleModal={onClickToggleModal}/>}
             <StyledCalendarWrapper>
                 <Calendar
                     locale="ko-KR"
                     calendarType='gregory'
                     value={value}
-                    onChange={onChange}
+                    onChange={setValue}
                     tileContent={tileContent}
                     view="month"
                     nextLabel={"▶"}
@@ -78,7 +82,7 @@ export const CalendarPage = () => {
                     next2Label={null}
                     prev2Label={null}
                     showNeighboringMonth={false}
-                    onActiveStartDateChange={() => undefined}
+                    onActiveStartDateChange={({ activeStartDate }) => {handleMonth(activeStartDate);}}
                     formatShortWeekday={(locale, date) => customMonth[date.getDay()]}
                     formatDay={(locale, date) => dayjs(date).format("D")}
                 />
@@ -153,6 +157,7 @@ const StyledCalendarWrapper = styled.div`
         height: 90px;
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: center;
         font-weight: bold;
         font-size: 12px;
@@ -173,7 +178,7 @@ const StyledCalendarWrapper = styled.div`
         content: '';
         position: absolute;
         top: 12%;
-        left: 0;
+        left: 23%;
         width: 28px;
         height: 28px;
         border-radius: 28px;

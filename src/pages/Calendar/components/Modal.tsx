@@ -6,15 +6,17 @@ import IcRightArrow from "@icon/ic-right-arrow.svg";
 import Button from "@calendar/components/Button.tsx";
 
 interface ModalDefaultType {
+    onClickModalButton: () => void;
     onClickToggleModal: () => void;
 }
 
-const Modal = ({onClickToggleModal, children}: PropsWithChildren<ModalDefaultType>) => {
+const Modal = ({onClickModalButton, onClickToggleModal, children}: PropsWithChildren<ModalDefaultType>) => {
     const closeModal = () => {
         if (onClickToggleModal) {
             onClickToggleModal();
         }
     }
+
     return (
         <ModalContainer>
             <ModalBox>
@@ -28,7 +30,7 @@ const Modal = ({onClickToggleModal, children}: PropsWithChildren<ModalDefaultTyp
                     <ModalContentText>우리의 지난 갈등을 함께 살펴봐요</ModalContentText>
                 </ModalContentContainer>
                 <ModalButtonContainer>
-                    <Button text={"판결문 보러가기"} rightIcon={IcRightArrow}/>
+                    <Button text={"판결문 보러가기"} onClick={onClickModalButton} rightIcon={IcRightArrow}/>
                 </ModalButtonContainer>
             </ModalBox>
             <ModalDim onClick={closeModal}/>
