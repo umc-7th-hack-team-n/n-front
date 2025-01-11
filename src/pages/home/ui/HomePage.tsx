@@ -13,7 +13,7 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => undefined };
   const rightHeaderActionArr: HeaderAction[] = [
-    { icon: IcCalendar, onClick: () => navigate('calendar', {replace: true}) },
+    { icon: IcCalendar, onClick: () => navigate('/calendar', {replace: true}) },
   ];
 
   return (
