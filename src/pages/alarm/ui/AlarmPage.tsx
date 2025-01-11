@@ -39,9 +39,20 @@ const AlarmPage = () => {
                 <TimerBtn>재설정</TimerBtn>
                 <TimerBtn>일시정지</TimerBtn>
             </BtnBox>
-            <DescriptDiv>
-
-            </DescriptDiv>
+            <DescriptBox>
+                <DescriptDiv>
+                    <DescriptTimeDiv>첫 5분</DescriptTimeDiv>
+                    <DescriptionDiv>눈을 맞추고 서로의 호흡에 집중해 보세요.</DescriptionDiv>
+                </DescriptDiv>
+                <DescriptDiv>
+                    <DescriptTimeDiv>두번째 5분</DescriptTimeDiv>
+                    <DescriptionDiv>천천히, 깊고 규칙적으로 호흡하며 내면의 고요를 느껴보세요.</DescriptionDiv>
+                </DescriptDiv>
+                <DescriptDiv>
+                    <DescriptTimeDiv>마지막 5분</DescriptTimeDiv>
+                    <DescriptionDiv>상대에게 감사하는 한 가지를 말하며 긍정적인 감정을 공유하세요.</DescriptionDiv>
+                </DescriptDiv>
+            </DescriptBox>
             <Button onClick={()=>navigate(-1)}>완료</Button>
         </Container>
         </>
@@ -79,15 +90,6 @@ const Time = styled.div`
     align-items: center;
 `
 
-const CircleTimer = styled.div`
-    background-color: white;
-    // width: 50%;
-    min-height: 270px;
-    height: 88.601%;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-`
-
 const BtnBox = styled.div`
     display: flex;
     justify-content: space-between;
@@ -107,10 +109,47 @@ const TimerBtn = styled.button`
     border-radius: 30px;
 `
 
-const DescriptDiv = styled.div`
+const DescriptBox = styled.div`
     width: 100%;
     height: 57.8%;
-    background-color: white;
+    // background-color: green;
+    margin-bottom: 8%;
+    display: flex;
+    flex-direction: column;
+`
+
+const DescriptDiv = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 0.75px solid #656565;
+    &:last-child {
+        border-bottom: 0.75px solid #656565;
+    }
+`
+
+const DescriptTimeDiv = styled.div`
+    color: #FFF;
+    // text-align: center;
+    font-family: Pretendard;
+    // font-size: 15px;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    min-width: 23%;
+    // background-color: pink;
+`
+const DescriptionDiv = styled.div`
+    color: #FFF;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px; /* 150% */
+    word-break: keep-all;
 `
 
 const Button = styled.button`
