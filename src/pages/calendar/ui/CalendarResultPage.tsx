@@ -20,7 +20,6 @@ const CalendarResultPage = () => {
     };
 
     const {data} = useGetConflict(state.id);
-    console.log(data?.success);
 
     const value = data?.success?.score.split(':')[0];
     const totalscore = Number(value) * 10;
