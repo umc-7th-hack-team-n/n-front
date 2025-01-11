@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ImgRules from "@shared/assets/image/img-home-rules.png";
 import { useNavigate } from "react-router";
 import HomeAppbar from "@home/components/HomeAppbar.tsx";
-import fight from "@icon/ic-fight.svg";
+import fight from "@icon/ic-conflict.svg";
 import reconciliation from "@icon/ic-reconciliation.svg";
 import SmallBanner from "@home/components/SmallBanner.tsx";
 import { useGetCoupleInfo } from "@home/feature/useGetCoupleInfo.ts";
@@ -29,10 +29,9 @@ export const HomePage = () => {
   return (
     <Container>
       <HomeAppbar rightHeaderActionArr={rightHeaderActionArr} f_nickname={data!.data.f_nickname} m_nickname={data!.data.m_nickname}/>
-      <ContentsDiv onClick={() => navigate(`/rules/${1}`)}>
-        <ContentImg src={ImgRules} width={'100%'} />
-        <Text right={'20px'} bottom={'15px'}>우리가 지킬 10가지</Text>
-      </ContentsDiv>
+      <Banner>
+        <Label>우리가 지킬 10가지</Label>
+      </Banner>
       <SmallContainer>
         <SmallBanner title={'판결'} image={fight} onClick={() => navigate('/judge-input')}/>
         <SmallBanner title={'화해'} image={reconciliation} onClick={() => navigate('/alarm')} />
@@ -43,63 +42,45 @@ export const HomePage = () => {
 
 const Container = styled.div`
   display: flex;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
   background: linear-gradient(to bottom, #00314C 0%, #000033 100%);
-  padding-top: 23px;
+  gap: 30px;
+  padding: 23px 20px;
 `;
 
-const ContentsDiv = styled.div`
-  width: 90.423%;
-  flex-shrink: 0;
+const Banner = styled.div`
+  display: flex;
+  width: 100%;
+  height: 45%;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-image: url(${ImgRules});
+  background-size: cover;
   border-radius: 20px;
-  margin-top: 27px;
-  margin-bottom: 30px;
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  cursor: pointer;
 `;
 
-const ContentImg = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-`;
-
-interface TextStyle {
-  right?: string;
-  bottom?: string;
-}
-
-const Text = styled.div<TextStyle>`
-  position: absolute;
-  ${props => props.right ?
-    `right: ${props.right};`
-    :
-    `right: 50%;
-    transform: translate(50%, 50%);`
-  } // right: ${props => props.right || '50%'};
-  bottom: ${props => props.bottom};
-  text-align: center;
-  color: #121212;
-
-  font-family: Pretendard;
+const Label = styled.p`
+  width: fit-content;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 22px; /* 137.5% */
-  letter-spacing: 1px;
+  font-weight: 400;
+  color: white;
+  line-height: 22px;
+  background-color: black;
+  border: none;
+  border-radius: 30px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  padding: 5px 17px;
 `;
+
 
 const SmallContainer = styled.div`
-  width: 100%;
-  height: 100vh;
   display: flex;
-  flex-direction: row;
+  width: 100%;
+  flex-direction: column;
   justify-content: center;
-  column-gap: 21px;
-  padding-bottom: 30px;
+  gap: 20px
 `;

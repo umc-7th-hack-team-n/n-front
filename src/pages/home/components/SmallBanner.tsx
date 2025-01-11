@@ -7,74 +7,69 @@ interface SmallBannerProps {
   onClick?: () => void;
 }
 
-const SmallBanner: React.FC<SmallBannerProps> = ({image, title, onClick}) => {
+const SmallBanner: React.FC<SmallBannerProps> = ({ image, title, onClick }) => {
   const description = title === '판결'
     ? '서로 이해가 어려울 땐\n제3자의 시선에서 답을 찾아보세요.'
     : '고요함 속에서 서로를 이해해 보세요.';
+  const label = title === '판결' ? '판결하기' : '화해하기';
 
   return (
-    <SmallContetnsDiv title={title} onClick={onClick}>
-      <img src={image} alt='banner-image'/>
-      <Text bottom={'75px'}>{title}</Text>
-      <SmallText>{description}</SmallText>
-    </SmallContetnsDiv>
+    <Container onClick={onClick}>
+      <Content>
+        <LargeText>{title}</LargeText>
+        <SmallText>{description}</SmallText>
+        <Label>{label}</Label>
+      </Content>
+      <img src={image} alt={title} />
+    </Container>
   );
-}
+};
 
 export default SmallBanner;
 
-const SmallContetnsDiv = styled.div<Pick<SmallBannerProps, 'title'>>`
-  width: 42.523%;
-  // height: 83.34%;
-  height: 287px;
-  // max-height: 287px;
-  padding: 0 17px 15px 17px;
+const Container = styled.div`
   display: flex;
-  // flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border: 1px solid ${({title}) => title === '판결' ? '#3b6cf3' : '#ff8669' };
-  border-radius: 20px;
-  position: relative;
-  // aspect-ratio: 1.73 / 1
-  background-color: ${({title}) => title === '판결' ? '#dee5ff' : '#ffeae5'};
-  cursor: pointer;
-`
-
-const SmallText = styled.div`
-  font-family: Pretendard;
-  font-size: 9px;
-  position: absolute;
-  text-align: center;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 35px;
   width: 100%;
-  white-space: pre-line;
-`
+  height: 12vh;
+  min-height: 129px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3f7ff;
+  border: 1px solid #dddddd;
+  border-radius: 20px;
+  padding: 20px 14px 15px 20px;
+`;
 
-interface TextStyle {
-  right?: string;
-  bottom?: string;
-}
-const Text = styled.div<TextStyle>`
-  position: absolute;
-  ${props => props.right ?
-  `right: ${props.right};`
-  :
-  `right: 50%;
-    transform: translate(50%, 50%);`
-}
-  // right: ${props => props.right || '50%'};
-  bottom: ${props => props.bottom};
-  text-align: center;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+`;
+
+const LargeText = styled.p`
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 22px;
   color: #121212;
+`;
 
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
+const SmallText = styled.p`
+  font-size: 12px;
   font-weight: 500;
-  line-height: 22px; /* 137.5% */
-  letter-spacing: 1px;
-`
+  line-height: 14px;
+  color: #323232;
+  white-space: pre-wrap;
+`;
+
+const Label = styled.div`
+  display: inline-block;
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  padding: 5px 18px;
+  border-radius: 30px;
+  background-color: black;
+`;
