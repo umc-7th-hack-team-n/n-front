@@ -7,6 +7,6 @@ export const getCalendar: (month: string) => Promise<BaseResponse<CalendarRespon
         const response = await axiosInstance.get(`/api/conflicts/${month}`);
         return response.data;
     } catch (error){
-        console.error('Calendar API Error', error);
+        console.error('calendar API Error', error);
     }
 }

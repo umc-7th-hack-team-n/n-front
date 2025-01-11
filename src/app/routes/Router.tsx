@@ -7,7 +7,8 @@ import LoadingPage from "@pages/judge/ui/LoadingPage.tsx";
 import RulesPage from "@pages/rules/ui/RulesPage.tsx";
 import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
 import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
-import { CalendarPage } from "@pages/Calendar";
+import { CalendarPage } from "pages/calendar";
+import CalendarResultPage from "@pages/calendar/ui/CalendarResultPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: 'calendar',
         element: <CalendarPage/>,
+      },
+      {
+        path: 'calendar-result',
+        element: <CalendarResultPage/>,
       },
       {
         path: 'judge-input',

@@ -3,14 +3,14 @@ import styled from "styled-components";
 import IcModalClose from "@icon/ic-modal-cancel.svg";
 import IcModalBreak from "@icon/ic-modal-break.svg";
 import IcRightArrow from "@icon/ic-right-arrow.svg";
-import Button from "@calendar/components/Button.tsx";
+import Button from "@pages/calendar/components/Button.tsx";
 
 interface ModalDefaultType {
     onClickModalButton: () => void;
     onClickToggleModal: () => void;
 }
 
-const Modal = ({onClickModalButton, onClickToggleModal, children}: PropsWithChildren<ModalDefaultType>) => {
+const Modal = ({onClickModalButton, onClickToggleModal}: PropsWithChildren<ModalDefaultType>) => {
     const closeModal = () => {
         if (onClickToggleModal) {
             onClickToggleModal();
