@@ -3,6 +3,7 @@ import { HeaderAction, RulesReq } from "@shared/types";
 import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import styled from "styled-components";
 import NumberDiv from "../components/NumberDiv";
+import { ErrorContainer } from "./RulesPage";
 
 import Ic1 from "@icon/numbers/ic-number-1.svg";
 import Ic2 from "@icon/numbers/ic-number-2.svg";
@@ -15,8 +16,10 @@ import Ic8 from "@icon/numbers/ic-number-8.svg";
 import Ic9 from "@icon/numbers/ic-number-9.svg";
 import Ic10 from "@icon/numbers/ic-number-10.svg";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePutPromise } from "@pages/rules/feature/usePutPromise.ts";
+import { useGetPromise } from "../feature/useGetPromise";
+import { RulesResponse } from "@shared/types";
 
 const arr = [
     { number: 1, icon: Ic1 },
@@ -34,6 +37,7 @@ const arr = [
 const RulesModifyPage = () => {
     const navigate = useNavigate();
     const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => navigate(-1) };
+    
     // RulesReq 타입으로 상태 정의
     const [rules, setRules] = useState<RulesReq>({
         text1: "",
@@ -47,7 +51,40 @@ const RulesModifyPage = () => {
         text9: "",
         text10: "",
     });
-    const { mutate, isPending } = usePutPromise()
+
+    // 기능 수정: 작성 시 이전에 입력한 데이터 남아있도록
+    const { data, isLoading, isError } = useGetPromise(1);
+    const { mutate, isPending } = usePutPromise();
+
+    // 수정
+    useEffect(() => {
+        if (data?.success) {
+            const prevRules: RulesResponse = data.success;
+
+            // 상태 업데이트
+            setRules((prev) => {
+                const updatedRules = { ...prev };
+                for (let i = 1; i <= 10; i++) {
+                const key = `text${i}`;
+                updatedRules[key] = String(prevRules[`text${i}` as keyof RulesResponse]);
+                }
+                return updatedRules;
+            });
+        }
+    }, [data]);
+
+    if (isLoading) {
+        return <div>로딩중...</div>;
+    }
+
+    if (isError || !data?.success) {
+        return (
+            <ErrorContainer>
+            <p>데이터를 불러오는 중 오류가 발생했습니다.</p>
+            <Button onClick={() => navigate(-1)}>돌아가기</Button>
+            </ErrorContainer>
+        );
+    };
 
     const onSubmit = () => {
         mutate(rules);

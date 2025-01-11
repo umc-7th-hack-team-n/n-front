@@ -99,7 +99,7 @@ const Button = styled.button`
   border-radius: 30px;
 `;
 
-const ErrorContainer = styled.div`
+export const ErrorContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
