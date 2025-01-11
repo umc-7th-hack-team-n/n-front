@@ -29,7 +29,7 @@ export const HomePage = () => {
   return (
     <Container>
       <HomeAppbar rightHeaderActionArr={rightHeaderActionArr} f_nickname={data!.data.f_nickname} m_nickname={data!.data.m_nickname}/>
-      <Banner>
+      <Banner onClick={() => navigate('/rules/1')}>
         <Label>우리가 지킬 10가지</Label>
       </Banner>
       <SmallContainer>
