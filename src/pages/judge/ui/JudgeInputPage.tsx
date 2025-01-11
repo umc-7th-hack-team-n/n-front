@@ -1,16 +1,18 @@
 import AppBar from "@shared/ui/AppBar.tsx";
-import { HeaderAction } from "@shared/types";
+import { HeaderAction, JudgeRequest } from "@shared/types";
 import { useNavigate } from "react-router";
 import IcLeftArrow from "@icon/ic-left-arrow.svg";
 import Bubble from "@pages/judge/components/Bubble.tsx";
 import styled from "styled-components";
-import { useState } from "react";
+import React, { useState } from "react";
+import { usePostConflict } from "@pages/judge/feature/usePostConflict.ts";
 
 const JudgeInputPage = () => {
   const navigate = useNavigate();
   const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => navigate(-1) };
   const [plaintiffStory, setPlaintiffStory] = useState('');
   const [defendantStory, setDefendantStory] = useState('');
+  const { mutate } = usePostConflict();
 
   const changePlaintiffStory = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPlaintiffStory(e.target.value);
@@ -21,7 +23,8 @@ const JudgeInputPage = () => {
   }
 
   const handleNext = () => {
-    navigate('/loading');
+    const judgeRequest: JudgeRequest = { couple_id: 1, m_text: plaintiffStory, f_text: defendantStory };
+    mutate(judgeRequest);
   }
 
 

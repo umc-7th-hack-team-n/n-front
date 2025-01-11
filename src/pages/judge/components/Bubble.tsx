@@ -8,7 +8,7 @@ interface BubbleProps {
 }
 
 const Bubble: React.FC<BubbleProps> = ({ type, value, handler }) => {
-  const description = type === 'plaintiff' ? '원고1의 입장을 이야기 해주세요' : '피고1의 입장을 이야기 해주세요';
+  const description = type === 'plaintiff' ? '남자의 입장을 이야기 해주세요' : '여자의 입장을 이야기 해주세요';
 
   return (
     <Container>

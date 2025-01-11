@@ -1,7 +1,11 @@
 import styled, { keyframes } from "styled-components";
+import React from "react";
 
-const Slider = () => {
-  const initialValue = 20;
+interface SliderProps {
+  score: number;
+}
+
+const Slider: React.FC<SliderProps> = ({ score }) => {
 
   return (
     <Container>
@@ -10,8 +14,8 @@ const Slider = () => {
         <Label>여자</Label>
       </LabelContainer>
       <SliderWrapper>
-        <Track $initialValue={initialValue} />
-        <Thumb $initialValue={initialValue} />
+        <Track $initialValue={score} />
+        <Thumb $initialValue={score} />
       </SliderWrapper>
     </Container>
   );

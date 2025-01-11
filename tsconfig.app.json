@@ -29,6 +29,7 @@
       "@icon/*": ["shared/assets/icon/*"],
       "@image/*": ["shared/assets/image/*"],
       "@home/*": ["pages/home/*"],
+      "@calendar/*": ["pages/calendar/*"]
     }
   },
   "include": ["src"]

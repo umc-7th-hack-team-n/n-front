@@ -1,45 +1,30 @@
-import AppBar from "@shared/ui/AppBar.tsx";
 import { HeaderAction } from "@shared/types";
-import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import IcCalendar from "@shared/assets/icon/ic-calendar.svg";
 import styled from "styled-components";
 import ImgRules from "@shared/assets/image/img-home-rules.png";
-import ImgHandShake from "@shared/assets/image/img-handshake.png";
-import RightHand from '@shared/assets/image/img-right-hand.png';
-import LeftHand from '@shared/assets/image/img-left-hand.png';
 import { useNavigate } from "react-router";
+import HomeAppbar from "@home/components/HomeAppbar.tsx";
+import fight from "@icon/ic-fight.svg"
+import reconciliation from "@icon/ic-reconciliation.svg"
+import SmallBanner from "@home/components/SmallBanner.tsx";
 
 export const HomePage = () => {
-  const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => undefined };
+    const navigate = useNavigate();
   const rightHeaderActionArr: HeaderAction[] = [
-    { icon: IcCalendar, onClick: () => undefined },
+    { icon: IcCalendar, onClick: () => navigate('/calendar') },
   ];
-  const navigate = useNavigate();
+
 
   return (
     <Container>
-      <AppBar leftHeaderAction={leftHeaderAction} rightHeaderActionArr={rightHeaderActionArr} />
-      <ContetnsDiv onClick={()=>navigate('/rules')}>
+      <HomeAppbar rightHeaderActionArr={rightHeaderActionArr} />
+      <ContentsDiv onClick={()=>navigate('/')}>
         <ContentImg src={ImgRules} width={'100%'} />
         <Text right={'20px'} bottom={'15px'}>우리가 지킬 10가지</Text>
-      </ContetnsDiv>
+      </ContentsDiv>
       <SmallContainer>
-        <SmallContetnsDiv color={'#DEE5FF'} onClick={()=>navigate('/judge-input')}>
-          <img src={LeftHand}/>
-          <img src={RightHand} />
-          <Text bottom={'75px'}>판결</Text>
-          <SmallText>
-            서로 이해가 어려울 땐,<br/>
-            제3자의 시선에서 답을 찾아보세요.
-          </SmallText>
-        </SmallContetnsDiv>
-        <SmallContetnsDiv color={'#FFEAE5'} onClick={()=>navigate('/alarm')}>
-          <img src={ImgHandShake} />
-          <Text bottom={'75px'}>화해</Text>
-          <SmallText>
-            고요함 속에서 서로를 이해해 보세요.
-          </SmallText>
-        </SmallContetnsDiv>
+        <SmallBanner title={'판결'} image={fight} onClick={() => navigate('/judge-input')}/>
+        <SmallBanner title={'화해'} image={reconciliation} />
       </SmallContainer>
     </Container>
   );
@@ -49,11 +34,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   overflow-y: auto;
+  background: linear-gradient(to bottom, #00314C 0%, #000033 100%);
+  padding-top: 23px;
 `
 
-const ContetnsDiv = styled.div`
+const ContentsDiv = styled.div`
   width: 90.423%;
   flex-shrink: 0;
   border-radius: 20px;
@@ -83,7 +69,7 @@ const Text = styled.div<TextStyle>`
     `right: 50%;
     transform: translate(50%, 50%);`
   }
-  // right: ${props => props.right || '50%'};
+      // right: ${props => props.right || '50%'};
   bottom: ${props => props.bottom};
   text-align: center;
   color: #121212;
@@ -96,17 +82,6 @@ const Text = styled.div<TextStyle>`
   letter-spacing: 1px;
 `
 
-const SmallText = styled.div`
-  font-family: Pretendard;
-  font-size: 9px;
-  position: absolute;
-  text-align: center;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 35px;
-  width: 100%;
-`
-
 const SmallContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -115,23 +90,4 @@ const SmallContainer = styled.div`
   justify-content: center;
   column-gap: 21px;
   padding-bottom: 30px;
-`
-
-const SmallContetnsDiv = styled.div<{color: string}>`
-  background-color: yellow;
-  width: 42.523%;
-  // height: 83.34%;
-  height: 287px;
-  // max-height: 287px;
-  padding: 0 17px 15px 17px;
-  display: flex;
-  // flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border-radius: 20px;
-  position: relative;
-  // aspect-ratio: 1.73 / 1
-  background-color: ${props => props.color};
-  cursor: pointer;
 `

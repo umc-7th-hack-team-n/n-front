@@ -8,6 +8,8 @@ import RulesPage from "@pages/rules/ui/RulesPage.tsx";
 import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
 import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
 import AlarmPage from '@pages/alarm/ui/AlarmPage';
+import { CalendarPage } from "@pages/Calendar";
+
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +19,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <OnboardingPage />,
+      },
+      {
+        path: 'calendar',
+        element: <CalendarPage/>,
       },
       {
         path: 'judge-input',
@@ -42,6 +48,7 @@ export const router = createBrowserRouter([
         path: 'alarm',
         element: <AlarmPage />
       }
+
     ],
   },
 ]);
