@@ -2,14 +2,17 @@ import styled, { keyframes } from "styled-components";
 import leftHand from "@shared/assets/icon/ic-hand-left.svg";
 import rightHand from "@shared/assets/icon/ic-hand-right.svg";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const LoadingPage = () => {
   const text = "판결중입니다";
+  const navigate = useNavigate();
 
   // todo: 판결 임의 딜레이
   useEffect(() => {
     const timer = setTimeout(() => {
       console.log('판결 완료');
+      navigate('/judge-result')
     }, 3000);
 
     return () => clearTimeout(timer);

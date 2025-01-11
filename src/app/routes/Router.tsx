@@ -5,6 +5,9 @@ import { HomePage } from "@pages/home";
 import { CalendarPage } from "@pages/calendar";
 import JudgeInputPage from "@pages/judge/ui/JudgeInputPage.tsx";
 import LoadingPage from "@pages/judge/ui/LoadingPage.tsx";
+import RulesPage from "@pages/rules/ui/RulesPage.tsx";
+import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
+import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -14,7 +17,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage/>,
+        element: <OnboardingPage />,
       },
       {
 
@@ -28,6 +31,18 @@ export const router = createBrowserRouter([
       {
         path: 'loading',
         element: <LoadingPage />
+      },
+      {
+        path: 'rules',
+        element: <RulesPage />
+      },
+      {
+        path: 'judge-result',
+        element: <JudgeResultPage />
+      },
+      {
+        path: 'home',
+        element: <HomePage />
       }
 
     ],
