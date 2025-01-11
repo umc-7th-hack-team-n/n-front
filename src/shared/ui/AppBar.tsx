@@ -42,7 +42,8 @@ const Wrapper = styled.header`
   position: relative;
   width: 100vw;
   max-width: 440px;
-  min-height: 7vh;
+  height: 7vh;
+  min-height: 54px;
   align-items: center;
   padding: 0 20px;
 
@@ -54,8 +55,8 @@ const Wrapper = styled.header`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    color: black;
-    font-size: 16px;
+    color: white;
+    font-size: 20px;
     font-weight: bold;
     margin: 0;
     text-align: center;
