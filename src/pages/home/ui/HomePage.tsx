@@ -10,11 +10,11 @@ import LeftHand from '@shared/assets/image/img-left-hand.png';
 import { useNavigate } from "react-router";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => undefined };
   const rightHeaderActionArr: HeaderAction[] = [
-    { icon: IcCalendar, onClick: () => undefined },
+    { icon: IcCalendar, onClick: () => navigate('calendar', {replace: true}) },
   ];
-  const navigate = useNavigate();
 
   return (
     <Container>
