@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router';
-
 import { RootLayout } from '@app/layout';
 import { HomePage } from "@pages/home";
 import JudgeInputPage from "@pages/judge/ui/JudgeInputPage.tsx";
@@ -8,8 +7,8 @@ import RulesModifyPage from "@pages/rules/ui/RulesModifyPage.tsx";
 import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
 import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
 import AlarmPage from '@pages/alarm/ui/AlarmPage';
-import { CalendarPage } from "@pages/Calendar";
 import RulesPage from "@pages/rules/ui/RulesPage.tsx";
+import { CalendarPage } from "@pages/calendar";
 
 
 export const router = createBrowserRouter([

@@ -1,7 +1,7 @@
 import AppBar from "@shared/ui/AppBar.tsx";
 import {HeaderAction} from "@shared/types";
-// import Modal from "@calendar/components/Modal.tsx"
-import Modal from "../components/Modal.tsx";
+import Modal from "@pages/calendar/components/Modal.tsx"
+// import Modal from "../components/Modal.tsx";
 
 import Calendar from "react-calendar";
 import {useState, useCallback} from "react";
@@ -11,8 +11,8 @@ import styled from "styled-components";
 import 'react-calendar/dist/Calendar.css';
 import dayjs from "dayjs";
 
-// import {useGetCalendar} from "@calendar/feature/useGetCalendar.ts";
-import {useGetCalendar} from "../feature/useGetCalendar.ts";
+import {useGetCalendar} from "@pages/calendar/feature/useGetCalendar.ts";
+// import {useGetCalendar} from "../feature/useGetCalendar.ts";
 
 import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import IcCalendarMarked from "@shared/assets/icon/ic-calendar-marked.svg";
