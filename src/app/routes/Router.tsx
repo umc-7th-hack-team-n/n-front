@@ -7,7 +7,7 @@ import LoadingPage from "@pages/judge/ui/LoadingPage.tsx";
 import RulesPage from "@pages/rules/ui/RulesPage.tsx";
 import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
 import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
-import { CalendarPage } from "pages/calendar";
+import { CalendarPage } from "@pages/calendar";
 import CalendarResultPage from "@pages/calendar/ui/CalendarResultPage.tsx";
 
 
