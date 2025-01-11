@@ -34,8 +34,8 @@ export const HomePage = () => {
         <Text right={'20px'} bottom={'15px'}>우리가 지킬 10가지</Text>
       </ContentsDiv>
       <SmallContainer>
-        <SmallBanner title={'판결'} image={fight} onClick={() => navigate('/judge-input')} />
-        <SmallBanner title={'화해'} image={reconciliation} />
+        <SmallBanner title={'판결'} image={fight} onClick={() => navigate('/judge-input')}/>
+        <SmallBanner title={'화해'} image={reconciliation} onClick={() => navigate('/alarm')} />
       </SmallContainer>
     </Container>
   );
