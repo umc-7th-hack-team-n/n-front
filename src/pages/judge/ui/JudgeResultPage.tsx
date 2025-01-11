@@ -4,7 +4,10 @@ import { HeaderAction, JudgeResponse } from "@shared/types";
 import { useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
 import Slider from "@pages/judge/components/Slider.tsx";
-import logo from '@icon/ic-logo.svg';
+// import logo from '@icon/ic-logo.svg';
+import logo from '@icon/ic-logo-lovecourt.svg';
+import judge from '@shared/assets/image/img-judge.png';
+// import judge from '@image/img-judge.png'; // @image 경로 오류
 
 const JudgeResultPage = () => {
   const { judgeResponse } = useLocation().state as { judgeResponse: JudgeResponse };
@@ -16,6 +19,8 @@ const JudgeResultPage = () => {
 
   const value = judgeResponse.score.split(':')[0];
   const score = Number(value) * 10;
+
+  console.log(judgeResponse);
 
   return (
     <>
@@ -57,13 +62,13 @@ const ResultContainer = styled.div`
   border: none;
   border-radius: 20px;
   gap: 15px;
-  background-color: #F5F5F5;
+  background: url(${judge}) #F5F5F5 50% no-repeat;
   padding: 20px;
   overflow-y: auto;
 `;
 
 const BoldText = styled.p`
-  width: 75px;
+  width: 100%;
   font-size: 20px;
   font-weight: bold;
   line-height: 25px;
@@ -78,6 +83,7 @@ const Judgement = styled.p`
   line-height: 25px;
   font-weight: 600;
   color: black;
+  overflow-y: auto scroll;
 `;
 
 const Section = styled.div`

@@ -53,7 +53,7 @@ export const CalendarPage = () => {
     const tileContent = ({date, view}: { date: Date; view: string }) => {
         if (view === "month") {
             const formattedDate = dayjs(date).format("YYYY-MM-DD"); // 로컬 시간 기준으로 날짜 형식화
-            const markedDate = data?.success?.find((item) => item.date === formattedDate);
+            const markedDate = data?.success.find((item) => item.date === formattedDate);
 
             if (markedDate?.date) {
                 return (
@@ -84,9 +84,9 @@ export const CalendarPage = () => {
                     next2Label={null}
                     prev2Label={null}
                     showNeighboringMonth={false}
-                    onActiveStartDateChange={({ activeStartDate }) => {handleMonth(activeStartDate!);}}
-                    formatShortWeekday={(_locale, date) => customMonth[date.getDay()]}
-                    formatDay={(_locale, date) => dayjs(date).format("D")}
+                    onActiveStartDateChange={({ activeStartDate }) => {handleMonth(activeStartDate);}}
+                    formatShortWeekday={(locale, date) => customMonth[date.getDay()]}
+                    formatDay={(locale, date) => dayjs(date).format("D")}
                 />
             </StyledCalendarWrapper>
 
@@ -107,7 +107,7 @@ const StyledCalendarWrapper = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 39px;
-    padding: 0 20px;
+    padding: 0px 20px;
 
     // 캘린더 전체
 
