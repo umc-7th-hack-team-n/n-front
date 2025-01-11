@@ -54,7 +54,7 @@ const Wrapper = styled.header`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    color: black;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     margin: 0;
