@@ -1,8 +1,7 @@
 import AppBar from "@shared/ui/AppBar";
-import { HeaderAction } from "@shared/types";
+import { HeaderAction, RulesResponse } from "@shared/types";
 import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import styled from "styled-components";
-import NumberDiv from "../components/NumberDiv";
 
 import Ic1 from "@icon/numbers/ic-number-1.svg";
 import Ic2 from "@icon/numbers/ic-number-2.svg";
@@ -15,34 +14,51 @@ import Ic8 from "@icon/numbers/ic-number-8.svg";
 import Ic9 from "@icon/numbers/ic-number-9.svg";
 import Ic10 from "@icon/numbers/ic-number-10.svg";
 import { useNavigate } from "react-router";
+import Rule from "@pages/rules/components/Rule.tsx";
+import { useGetPromise } from "@pages/rules/feature/useGetPromise.ts";
+import IcPen from "@icon/ic-pen.svg";
 
-const RulesPage = () => {
-    const navigate = useNavigate();
-    const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => navigate(-1) };
+const icons = [Ic1, Ic2, Ic3, Ic4, Ic5, Ic6, Ic7, Ic8, Ic9, Ic10];
+
+const RulesModifyPage = () => {
+  const navigate = useNavigate();
+  const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => navigate(-1) };
+  const rightHeaderAction: HeaderAction[] = [{ icon: IcPen, onClick: () => navigate(`/rules-modify`) }];
+  const { data, isLoading, isError } = useGetPromise(1);
+
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+
+  if (isError || !data?.success) {
     return (
-        <>
-        <AppBar leftHeaderAction={leftHeaderAction} title="사랑의 10계명" />
-        <Container>
-            <RuleBox>
-                <RuleTitle>우리 이것만은 꼭 지키자!</RuleTitle>
-                <NumberDiv numberIcon={Ic1} />
-                <NumberDiv numberIcon={Ic2} />
-                <NumberDiv numberIcon={Ic3} />
-                <NumberDiv numberIcon={Ic4} />
-                <NumberDiv numberIcon={Ic5} />
-                <NumberDiv numberIcon={Ic6} />
-                <NumberDiv numberIcon={Ic7} />
-                <NumberDiv numberIcon={Ic8} />
-                <NumberDiv numberIcon={Ic9} />
-                <NumberDiv numberIcon={Ic10} />
-            </RuleBox>
-            <Button>완료</Button>
-        </Container>
-        </>
+      <ErrorContainer>
+        <p>데이터를 불러오는 중 오류가 발생했습니다.</p>
+        <Button onClick={() => navigate(-1)}>돌아가기</Button>
+      </ErrorContainer>
     );
+  }
+
+  const rules: RulesResponse = data.success;
+
+  return (
+    <>
+      <AppBar leftHeaderAction={leftHeaderAction} title="사랑의 10계명" rightHeaderActionArr={rightHeaderAction} />
+      <Container>
+        <RuleBox>
+          <RuleTitle>우리 이것만은 꼭 지키자!</RuleTitle>
+          {icons.map((icon, index) => {
+            const ruleText = rules[`text${index + 1}` as keyof RulesResponse];
+            return <Rule key={index} numberIcon={icon} text={ruleText} />;
+          })}
+        </RuleBox>
+        <Button onClick={() => navigate(-1)}>확인</Button>
+      </Container>
+    </>
+  );
 }
 
-export default RulesPage;
+export default RulesModifyPage;
 
 const Container = styled.div`
     padding: 2.747% 5.089%;
@@ -60,6 +76,7 @@ const RuleBox = styled.div`
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-itmes:center;
     padding: 4.288% 1.7% 6.003% 1.7%;
 `
@@ -80,4 +97,18 @@ const Button = styled.button`
   cursor: pointer;
   padding: 15px;
   border-radius: 30px;
+`;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  text-align: center;
+
+  & > p {
+    margin-bottom: 20px;
+  }
 `;

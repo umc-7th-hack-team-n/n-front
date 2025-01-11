@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import React from "react";
 
-const NumberDiv = ({numberIcon}: { numberIcon: string }) => {
+interface NumberDivProps {
+  numberIcon: string;
+  value: string;
+  handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const NumberDiv = ({numberIcon, value, handler}: NumberDivProps) => {
     return (
         <Container>
             <img src={numberIcon} width={'30px'} />
-            <InputRule />
+            <InputRule value={value} onChange={handler} />
         </Container>
     );
 };

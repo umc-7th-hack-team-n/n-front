@@ -18,13 +18,13 @@ export const HomePage = () => {
   return (
     <Container>
       <HomeAppbar rightHeaderActionArr={rightHeaderActionArr} />
-      <ContentsDiv onClick={()=>navigate('/')}>
+      <ContentsDiv  onClick={() => navigate(`/rules/${1}`)}>
         <ContentImg src={ImgRules} width={'100%'} />
         <Text right={'20px'} bottom={'15px'}>우리가 지킬 10가지</Text>
       </ContentsDiv>
       <SmallContainer>
         <SmallBanner title={'판결'} image={fight} onClick={() => navigate('/judge-input')}/>
-        <SmallBanner title={'화해'} image={reconciliation} />
+        <SmallBanner title={'화해'} image={reconciliation} onClick={() => navigate('/alarm')} />
       </SmallContainer>
     </Container>
   );
