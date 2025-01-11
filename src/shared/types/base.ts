@@ -1,7 +1,7 @@
 export interface BaseResponse<T> {
   resultType: string;
   error?: Error;
-  data?: T;
+  success?: T;
 }
 
 interface Error {
