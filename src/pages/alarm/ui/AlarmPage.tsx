@@ -3,28 +3,36 @@ import { HeaderAction } from "@shared/types";
 import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import AppBar from "@shared/ui/AppBar";
 import styled from "styled-components";
-import { CountdownCircleTimer, useCountdown } from "react-countdown-circle-timer";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useState } from "react";
 
 const AlarmPage = () => {
     const navigate = useNavigate();
     const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => navigate(-1) };
-
+    const [key, setKey] = useState(0);
+    const [pause, setPause] = useState(false);
+    const [complete, setComplete] = useState(false);
     return (
         <>
         <AppBar leftHeaderAction={leftHeaderAction} title="명상 타이머" />
         <Container>
             <TimerBox>
                 <CountdownCircleTimer
-                isPlaying={true}
+                key={key}
+                isPlaying={!pause}
                 duration={900}
                 colors={['#003459', '#005070', '#001F38']}
-                colorsTime={[300,600,900]}
+                colorsTime={[900, 600, 300]}
                 size={270}
                 isGrowing={true}
                 >
                     {({ remainingTime }) => {
                         const minutes = Math.floor(remainingTime/60);
                         const seconds = remainingTime%60;
+                        if (remainingTime===0) {
+                            setComplete(true);
+                            setPause(true);
+                        }
                         return (
                             <Time>
                                 {String(minutes).padStart(2,"0")}
@@ -36,8 +44,18 @@ const AlarmPage = () => {
                 </CountdownCircleTimer>
             </TimerBox>
             <BtnBox>
-                <TimerBtn>재설정</TimerBtn>
-                <TimerBtn>일시정지</TimerBtn>
+                <TimerBtn onClick={()=>{
+                    setKey(prev => prev+1);
+                    setComplete(false);
+                    setPause(false);
+                    }}>재설정</TimerBtn>
+                <TimerBtn onClick={()=>setPause(prev => !prev)}>
+                    {pause ?
+                    '계속'
+                    :
+                    '일시정지'
+                    }
+                </TimerBtn>
             </BtnBox>
             <DescriptBox>
                 <DescriptDiv>
@@ -53,7 +71,7 @@ const AlarmPage = () => {
                     <DescriptionDiv>상대에게 감사하는 한 가지를 말하며 긍정적인 감정을 공유하세요.</DescriptionDiv>
                 </DescriptDiv>
             </DescriptBox>
-            <Button onClick={()=>navigate(-1)}>완료</Button>
+            <Button onClick={()=>navigate(-1)} disabled={!complete}>완료</Button>
         </Container>
         </>
     );
@@ -68,6 +86,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    overflow-y: auto;
 `
 
 const TimerBox = styled.div`
@@ -163,4 +182,7 @@ const Button = styled.button`
   cursor: pointer;
   padding: 15px;
   border-radius: 30px;
+  &:disabled {
+    cursor: default;
+  }
 `;
