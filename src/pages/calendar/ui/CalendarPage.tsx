@@ -1,7 +1,6 @@
 import AppBar from "@shared/ui/AppBar.tsx";
 import {HeaderAction} from "@shared/types";
 import Modal from "@pages/calendar/components/Modal.tsx"
-// import Modal from "../components/Modal.tsx";
 
 import Calendar from "react-calendar";
 import {useState, useCallback} from "react";
@@ -12,7 +11,6 @@ import 'react-calendar/dist/Calendar.css';
 import dayjs from "dayjs";
 
 import {useGetCalendar} from "@pages/calendar/feature/useGetCalendar.ts";
-// import {useGetCalendar} from "../feature/useGetCalendar.ts";
 
 import IcLeftArrow from "@shared/assets/icon/ic-left-arrow.svg";
 import IcCalendarMarked from "@shared/assets/icon/ic-calendar-marked.svg";
@@ -22,7 +20,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const CalendarPage = () => {
     const [value, setValue] = useState<Value>(new Date());
-    const [conflitID, setConflitID] = useState<number>(0);
+    const [confilct_id, setConflitId] = useState<number>(0);
     const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
     const navigate: NavigateFunction = useNavigate();
@@ -31,17 +29,18 @@ export const CalendarPage = () => {
 
     const {data} = useGetCalendar(dayjs(value).format("YYYY-MM"));
 
-    const onClickToggleModal = useCallback(() => {
+    const onClickToggleModal = useCallback((id: number) => {
         setOpenModal(!isOpenModal);
+        setConflitId(id);
     }, [isOpenModal]);
 
-    const onClickModalButton = useCallback(() => {
-        navigate("/judge-result", {state: conflitID});
-    }, [setConflitID]);
+    const onClickModalButton = ():void => {
+        navigate('/calendar-result', {state: {id: confilct_id}});
+    }
 
     const onClickMarkedDate = (id: number): void => {
-        setConflitID(id)
-        onClickToggleModal();
+        setConflitId(id)
+        onClickToggleModal(id);
     }
 
     const handleMonth = (activeMonth: Date) => {
@@ -53,7 +52,7 @@ export const CalendarPage = () => {
     const tileContent = ({date, view}: { date: Date; view: string }) => {
         if (view === "month") {
             const formattedDate = dayjs(date).format("YYYY-MM-DD"); // 로컬 시간 기준으로 날짜 형식화
-            const markedDate = data?.success.find((item) => item.date === formattedDate);
+            let markedDate= data?.success?.find((item) => item.date === formattedDate);
 
             if (markedDate?.date) {
                 return (
