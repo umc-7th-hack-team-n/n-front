@@ -33,7 +33,7 @@ export const HomePage = () => {
             제3자의 시선에서 답을 찾아보세요.
           </SmallText>
         </SmallContetnsDiv>
-        <SmallContetnsDiv color={'#FFEAE5'} onClick={()=>navigate('/')}>
+        <SmallContetnsDiv color={'#FFEAE5'} onClick={()=>navigate('/alarm')}>
           <img src={ImgHandShake} />
           <Text bottom={'75px'}>화해</Text>
           <SmallText>

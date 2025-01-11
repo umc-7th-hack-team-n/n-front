@@ -7,6 +7,7 @@ import LoadingPage from "@pages/judge/ui/LoadingPage.tsx";
 import RulesPage from "@pages/rules/ui/RulesPage.tsx";
 import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
 import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
+import AlarmPage from '@pages/alarm/ui/AlarmPage';
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: 'home',
         element: <HomePage />
+      },
+      {
+        path: 'alarm',
+        element: <AlarmPage />
       }
     ],
   },
