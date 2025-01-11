@@ -9,8 +9,10 @@ import reconciliation from "@icon/ic-reconciliation.svg"
 import SmallBanner from "@home/components/SmallBanner.tsx";
 
 export const HomePage = () => {
+  const rightHeaderActionArr: HeaderAction[] = [
+    { icon: IcCalendar, onClick: () => undefined },
+  ];
   const navigate = useNavigate();
-  const leftHeaderAction: HeaderAction = { icon: IcLeftArrow, onClick: () => undefined };
 
   return (
     <Container>
@@ -66,7 +68,7 @@ const Text = styled.div<TextStyle>`
     `right: 50%;
     transform: translate(50%, 50%);`
   }
-  // right: ${props => props.right || '50%'};
+      // right: ${props => props.right || '50%'};
   bottom: ${props => props.bottom};
   text-align: center;
   color: #121212;
