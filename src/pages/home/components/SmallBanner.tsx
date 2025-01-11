@@ -4,15 +4,16 @@ import React from "react";
 interface SmallBannerProps {
   image: string;
   title: '판결' | '화해';
+  onClick?: () => void;
 }
 
-const SmallBanner: React.FC<SmallBannerProps> = ({image, title}) => {
+const SmallBanner: React.FC<SmallBannerProps> = ({image, title, onClick}) => {
   const description = title === '판결'
     ? '서로 이해가 어려울 땐\n제3자의 시선에서 답을 찾아보세요.'
     : '고요함 속에서 서로를 이해해 보세요.';
 
   return (
-    <SmallContetnsDiv title={title}>
+    <SmallContetnsDiv title={title} onClick={onClick}>
       <img src={image} alt='banner-image'/>
       <Text bottom={'75px'}>{title}</Text>
       <SmallText>{description}</SmallText>
