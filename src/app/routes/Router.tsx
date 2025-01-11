@@ -20,7 +20,6 @@ export const router = createBrowserRouter([
         element: <OnboardingPage />,
       },
       {
-
         path: 'calendar',
         element: <CalendarPage/>,
       },
