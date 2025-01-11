@@ -7,6 +7,7 @@ import LoadingPage from "@pages/judge/ui/LoadingPage.tsx";
 import RulesModifyPage from "@pages/rules/ui/RulesModifyPage.tsx";
 import JudgeResultPage from "@pages/judge/ui/JudgeResultPage.tsx";
 import OnboardingPage from "@pages/onboard/OnboardingPage.tsx";
+import AlarmPage from '@pages/alarm/ui/AlarmPage';
 import { CalendarPage } from "@pages/Calendar";
 import RulesPage from "@pages/rules/ui/RulesPage.tsx";
 
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: 'home',
         element: <HomePage />
+      },
+      {
+        path: 'alarm',
+        element: <AlarmPage />
       },
       {
         path: 'rules/:id',

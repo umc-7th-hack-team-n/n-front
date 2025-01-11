@@ -24,7 +24,7 @@ export const HomePage = () => {
       </ContentsDiv>
       <SmallContainer>
         <SmallBanner title={'판결'} image={fight} onClick={() => navigate('/judge-input')}/>
-        <SmallBanner title={'화해'} image={reconciliation} />
+        <SmallBanner title={'화해'} image={reconciliation} onClick={() => navigate('/alarm')} />
       </SmallContainer>
     </Container>
   );
